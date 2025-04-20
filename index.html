@@ -19,7 +19,7 @@
       padding: 15px;
       box-sizing: border-box;
 
-      /* Prevent text selection */
+      /* Disable text selection */
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -88,19 +88,26 @@
     <p>Crash ක්‍රීඩාවේ චාර්ට් පද්ධතිය ප්‍රදේශ අනුව වෙනස් විය හැකි බැවින්, එකම signal එකක් භාවිත කරන විවිධ පරිශීලකයින්ට විවිධ ප්‍රතිඵල ලැබිය හැක.</p>
     <p>මෙම සේවාව ඔබේ ක්‍රීඩාව සඳහා සෘජුවම ගැලපේ යැයි අපි වගකීමක් නොදරන අතර, මෙය උදව් සපයන මාර්ගෝපදේශනයක් ලෙස පමණක් භාවිත කළ යුතුය.</p>
     <p>කරුණාකර වගකීම්වන්ත ලෙස ක්‍රියා කරන්න.</p>
-    <a href="https://damindu817.github.io/xtreme_predictor_crash_signal_1xbet_new/" class="button" id="proceedBtn">PROCEED TO SIGNAL</a>
+    <a href="#" class="button" id="proceedBtn">PROCEED TO SIGNAL</a>
   </div>
 
   <script>
-    // Prevent keyboard copy/paste shortcuts
+    // Check if already visited
+    if (sessionStorage.getItem("visited-warning-page")) {
+      window.location.href = "https://damindu817.github.io/menu"; // redirect to menu page
+    }
+
+    // Prevent keyboard shortcuts
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'v', 'a'].includes(e.key.toLowerCase())) {
         e.preventDefault();
       }
     });
 
-    // Replace current page from history
+    // Proceed button behavior
     document.getElementById("proceedBtn").addEventListener("click", function () {
+      // Mark as visited so back won't return here
+      sessionStorage.setItem("visited-warning-page", "true");
       window.location.replace("https://damindu817.github.io/xtreme_predictor_crash_signal_1xbet_new/");
     });
   </script>
