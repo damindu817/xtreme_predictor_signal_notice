@@ -18,8 +18,6 @@
       text-align: center;
       padding: 15px;
       box-sizing: border-box;
-
-      /* Disable text selection */
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -57,7 +55,6 @@
       line-height: 1.6;
       font-size: 0.95em;
       margin: 12px 0;
-      font-weight: normal;
     }
 
     .button {
@@ -92,23 +89,22 @@
   </div>
 
   <script>
-    // Check if already visited
-    if (sessionStorage.getItem("visited-warning-page")) {
-      window.location.href = "https://damindu817.github.io/menu"; // redirect to menu page
+    // ✅ If user came back using browser Back button
+    if (performance.navigation.type === 2 || sessionStorage.getItem("visited")) {
+      window.location.href = "https://damindu817.github.io/menu"; // change this to your actual MENU page URL
     }
 
-    // Prevent keyboard shortcuts
+    // Disable copy shortcuts
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'v', 'a'].includes(e.key.toLowerCase())) {
         e.preventDefault();
       }
     });
 
-    // Proceed button behavior
+    // On PROCEED click
     document.getElementById("proceedBtn").addEventListener("click", function () {
-      // Mark as visited so back won't return here
-      sessionStorage.setItem("visited-warning-page", "true");
-      window.location.replace("https://damindu817.github.io/xtreme_predictor_crash_signal_1xbet_new/");
+      sessionStorage.setItem("visited", "true");
+      window.location.href = "https://damindu817.github.io/xtreme_predictor_crash_signal_1xbet_new/";
     });
   </script>
 </body>
