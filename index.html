@@ -2,28 +2,96 @@
 <html lang="si">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notice - Crash Signal Advisory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Xtreme Crash Predictor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    body {
+    /* Loading Screen Styles */
+    html, body {
       margin: 0;
       padding: 0;
       background-color: #0b0c2a;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .loader-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+    }
+
+    .loader-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      color: #00ffd5;
+      z-index: 2;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    .progress-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+
+    .progress-bg {
+      stroke: rgba(0, 255, 213, 0.2);
+    }
+
+    .progress-bar {
+      stroke: #00ffd5;
+      stroke-dasharray: 439.6;
+      stroke-dashoffset: 439.6;
+      animation: loadRing 4s linear forwards;
+    }
+
+    @keyframes loadRing {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* Notice Page Styles (initially hidden) */
+    .notice-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0b0c2a;
       color: #f0f0f0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       text-align: center;
       padding: 15px;
       box-sizing: border-box;
-
-      /* Disable text selection */
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      touch-action: none;
     }
 
     .notice-container {
@@ -72,6 +140,7 @@
       box-shadow: 0 0 10px #ff4444;
       display: inline-block;
       transition: 0.3s ease;
+      cursor: pointer;
     }
 
     .button:hover {
@@ -80,22 +149,110 @@
     }
   </style>
 </head>
-<body oncontextmenu="return false" oncopy="return false" oncut="return false" onpaste="return false">
-  <div class="notice-container">
-    <h1>📢 පරිශීලක උපදේශනය</h1>
-    <p>Xtreme Predictor වෙතින් ලබාදෙන Crash Game Signal පිළිබඳව පහත කරුණු සැලකිල්ලට ගන්න.</p>
-    <p>Crash ක්‍රීඩාවේ චාර්ට් පද්ධතිය ප්‍රදේශ අනුව වෙනස් විය හැකි බැවින්, එකම signal එකක් භාවිත කරන විවිධ පරිශීලකයින්ට විවිධ ප්‍රතිඵල ලැබිය හැක.</p>
-    <p>මෙම සේවාව ඔබේ ක්‍රීඩාව සඳහා සෘජුවම ගැලපේ යැයි අපි වගකීමක් නොදරන අතර, මෙය උදව් සපයන මාර්ගෝපදේශනයක් ලෙස පමණක් භාවිත කළ යුතුය.</p>
-    <p>කරුණාකර වගකීම්වන්ත ලෙස ක්‍රියා කරන්න.</p>
-    <a href="https://damindu817.github.io/xtreme_predictor_crash_signal_1xbet_new/" class="button">PROCEED TO SIGNAL</a>
+<body oncontextmenu="return false">
+
+  <!-- Loading Screen -->
+  <div class="loader-container">
+    <svg class="progress-ring" width="150" height="150">
+      <circle class="progress-bg" cx="75" cy="75" r="70"/>
+      <circle class="progress-bar" cx="75" cy="75" r="70"/>
+    </svg>
+    <div class="loader-icon"><i class="fas fa-bolt"></i></div>
+  </div>
+
+  <!-- Notice Page (hidden initially) -->
+  <div class="notice-page">
+    <div class="notice-container">
+      <h1>📢 වැදගත් නෝටිස්</h1>
+      <p>Xtreme Predictor වෙතින් ලබාදෙන Crash Game Signal පිළිබඳව පහත කරුණු සැලකිල්ලට ගන්න.</p>
+      <p>Crash ක්‍රීඩාවේ චාර්ට් පද්ධතිය ප්‍රදේශ අනුව වෙනස් විය හැකි බැවින්, එකම signal එකක් භාවිත කරන විවිධ පරිශීලකයින්ට විවිධ ප්‍රතිඵල ලැබිය හැක.</p>
+      <p>මෙම සේවාව ඔබේ ක්‍රීඩාව සඳහා සෘජුවම ගැලපේ යැයි අපි වගකීමක් නොදරන අතර, මෙය උදව් සපයන මාර්ගෝපදේශනයක් ලෙස පමණක් භාවිත කළ යුතුය.</p>
+      <p>කරුණාකර වගකීම්වන්ත ලෙස ක්‍රියා කරන්න.</p>
+      <button id="proceedBtn" class="button">PROCEED TO SIGNAL</button>
+    </div>
   </div>
 
   <script>
-    // Disable keyboard copy/paste/select shortcuts
-    document.addEventListener('keydown', function (e) {
-      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'v', 'a'].includes(e.key.toLowerCase())) {
+    // Disable all text selection
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Disable copy/paste/cut
+    document.addEventListener('copy', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    document.addEventListener('cut', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    document.addEventListener('paste', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Disable zooming and other unwanted gestures
+    document.addEventListener('gesturestart', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('touchmove', function(e) {
+      if (e.scale !== 1) {
         e.preventDefault();
       }
+    }, { passive: false });
+
+    // Disable keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Disable Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A
+      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'v', 'a'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable F12 (DevTools)
+      if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable zooming with Ctrl+/-/0
+      if ((e.ctrlKey || e.metaKey) && ['+', '-', '0'].includes(e.key)) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // Prevent zooming with pinch gestures on touch devices
+    document.addEventListener('wheel', function(e) {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // After loading animation completes (4 seconds), show notice page
+    setTimeout(() => {
+      document.querySelector('.loader-container').style.display = 'none';
+      document.querySelector('.notice-page').style.display = 'flex';
+    }, 4000);
+
+    // Handle proceed button click - replace history to prevent back navigation
+    document.getElementById('proceedBtn').addEventListener('click', function() {
+      // Replace current history state
+      window.history.replaceState(null, null, window.location.href);
+      
+      // Redirect without adding to history
+      window.location.replace("https://damindu817.github.io/xtreme_predictor_crash_signal_1xbet_new/");
+    });
+
+    // Additional protection against right-click menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
     });
   </script>
 </body>
